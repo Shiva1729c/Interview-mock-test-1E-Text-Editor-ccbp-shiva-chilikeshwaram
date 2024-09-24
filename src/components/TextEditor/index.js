@@ -6,6 +6,27 @@ import './index.css'
 class TextEditor extends Component {
   state = {
     inputText: '',
+    isBold: false,
+    isItalic: false,
+    isUnderline: false,
+  }
+
+  updateToBoldText = () => {
+    this.setState(prevState => ({
+      isBold: !prevState.isBold,
+    }))
+  }
+
+  updateToItalicText = () => {
+    this.setState(prevState => ({
+      isItalic: !prevState.isItalic,
+    }))
+  }
+
+  updateToUnderlineText = () => {
+    this.setState(prevState => ({
+      isUnderline: !prevState.isUnderline,
+    }))
   }
 
   onChangeInputText = event => {
@@ -13,25 +34,39 @@ class TextEditor extends Component {
   }
 
   renderInputText = () => {
-    const {inputText} = this.state
+    const {inputText, isBold, isItalic, isUnderline} = this.state
+
+    const updateTextFont = isBold ? 'bold-font' : ''
+    const updateTextStyle = isItalic ? 'italic-font' : ''
+    const updateTextDecoration = isUnderline ? 'underline-font' : ''
 
     return (
       <textarea
         rows="4"
         cols="50"
-        className="text-area"
+        className={`text-area ${updateTextFont} ${updateTextStyle} ${updateTextDecoration}`}
         onChange={this.onChangeInputText}
         value={inputText}
       />
     )
   }
 
-  renderTextEditor = () => (
-    <div className="editor-container">
-      <TextEditorIcons />
-      {this.renderInputText()}
-    </div>
-  )
+  renderTextEditor = () => {
+    const {isBold, isItalic, isUnderline} = this.state
+    return (
+      <div className="editor-container">
+        <TextEditorIcons
+          updateToBoldText={this.updateToBoldText}
+          updateToItalicText={this.updateToItalicText}
+          updateToUnderlineText={this.updateToUnderlineText}
+          isBold={isBold}
+          isItalic={isItalic}
+          isUnderline={isUnderline}
+        />
+        {this.renderInputText()}
+      </div>
+    )
+  }
 
   render() {
     return (
