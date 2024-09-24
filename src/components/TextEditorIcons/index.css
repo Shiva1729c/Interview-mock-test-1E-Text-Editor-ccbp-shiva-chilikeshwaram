@@ -1,0 +1,19 @@
+.icon-button {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  font-size: 24px;
+  color: #f1f5f9; /* Inactive color */
+  outline: none;
+}
+
+.icons-container {
+  display: flex;
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+.icons-container {
+  margin-right: 10px;
+}
