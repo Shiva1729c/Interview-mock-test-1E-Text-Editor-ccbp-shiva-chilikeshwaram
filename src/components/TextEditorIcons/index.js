@@ -1,7 +1,7 @@
 import {VscBold} from 'react-icons/vsc'
 import {GoItalic} from 'react-icons/go'
 import {AiOutlineUnderline} from 'react-icons/ai'
-import './index.css'
+import {IconsContainer, IconButton} from './styledComponents'
 
 const TextEditorIcons = props => {
   const {
@@ -13,55 +13,40 @@ const TextEditorIcons = props => {
     isUnderline,
   } = props
 
-  const onClickBoldIcon = () => {
-    updateToBoldText()
-  }
-
-  const onClickItalicIcon = () => {
-    updateToItalicText()
-  }
-
-  const onClickUnderlineIcon = () => {
-    updateToUnderlineText()
-  }
-
-  const toggleBoldIconClassName = isBold ? 'active-icon' : ''
-  const toggleItalicIconClassName = isItalic ? 'active-icon' : ''
-  const toggleUnderlineIconClassName = isUnderline ? 'active-icon' : ''
-
   return (
-    <ul className="icons-container">
+    <IconsContainer>
       <li>
-        <button
+        <IconButton
           type="button"
-          className={`icon-button ${toggleBoldIconClassName}`}
+          isActive={isBold}
           data-testid="bold"
-          onClick={onClickBoldIcon}
+          onClick={updateToBoldText}
         >
           <VscBold />
-        </button>
+        </IconButton>
       </li>
       <li>
-        <button
+        <IconButton
           type="button"
-          className={`icon-button ${toggleItalicIconClassName}`}
+          isActive={isItalic}
           data-testid="italic"
-          onClick={onClickItalicIcon}
+          onClick={updateToItalicText}
         >
           <GoItalic />
-        </button>
+        </IconButton>
       </li>
       <li>
-        <button
+        <IconButton
           type="button"
-          className={`icon-button ${toggleUnderlineIconClassName}`}
+          isActive={isUnderline}
           data-testid="underline"
-          onClick={onClickUnderlineIcon}
+          onClick={updateToUnderlineText}
         >
           <AiOutlineUnderline />
-        </button>
+        </IconButton>
       </li>
-    </ul>
+    </IconsContainer>
   )
 }
+
 export default TextEditorIcons

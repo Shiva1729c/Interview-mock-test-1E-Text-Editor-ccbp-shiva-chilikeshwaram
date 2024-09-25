@@ -1,7 +1,16 @@
 import {Component} from 'react'
-import TextEditorIcons from '../TextEditorIcons'
 
-import './index.css'
+import {
+  TextEditorContainer,
+  ResponsiveContainer,
+  TextEditorTitleAndImageContainer,
+  TextEditorImage,
+  TextEditorTitle,
+  EditorContainer,
+  TextArea,
+} from './styledComponents'
+
+import TextEditorIcons from '../TextEditorIcons'
 
 class TextEditor extends Component {
   state = {
@@ -36,17 +45,15 @@ class TextEditor extends Component {
   renderInputText = () => {
     const {inputText, isBold, isItalic, isUnderline} = this.state
 
-    const updateTextFont = isBold ? 'bold-font' : ''
-    const updateTextStyle = isItalic ? 'italic-font' : ''
-    const updateTextDecoration = isUnderline ? 'underline-font' : ''
-
     return (
-      <textarea
+      <TextArea
         rows="4"
         cols="50"
-        className={`text-area ${updateTextFont} ${updateTextStyle} ${updateTextDecoration}`}
         onChange={this.onChangeInputText}
         value={inputText}
+        isBold={isBold}
+        isItalic={isItalic}
+        isUnderline={isUnderline}
       />
     )
   }
@@ -54,7 +61,7 @@ class TextEditor extends Component {
   renderTextEditor = () => {
     const {isBold, isItalic, isUnderline} = this.state
     return (
-      <div className="editor-container">
+      <EditorContainer>
         <TextEditorIcons
           updateToBoldText={this.updateToBoldText}
           updateToItalicText={this.updateToItalicText}
@@ -64,25 +71,24 @@ class TextEditor extends Component {
           isUnderline={isUnderline}
         />
         {this.renderInputText()}
-      </div>
+      </EditorContainer>
     )
   }
 
   render() {
     return (
-      <div className="text-editor-container">
-        <div className="responsive-container">
-          <div className="text-editor-title-and-image-container">
-            <h1 className="text-editor-title">Text Editor</h1>
-            <img
+      <TextEditorContainer>
+        <ResponsiveContainer>
+          <TextEditorTitleAndImageContainer>
+            <TextEditorTitle>Text Editor</TextEditorTitle>
+            <TextEditorImage
               src="https://assets.ccbp.in/frontend/react-js/text-editor-img.png"
               alt="text editor"
-              className="text-editor-image"
             />
-          </div>
+          </TextEditorTitleAndImageContainer>
           {this.renderTextEditor()}
-        </div>
-      </div>
+        </ResponsiveContainer>
+      </TextEditorContainer>
     )
   }
 }
